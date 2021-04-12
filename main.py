@@ -1,6 +1,7 @@
 import json
 import os
 from nltk.tokenize import word_tokenize
+from tokenizer import Tokenizer
 
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
@@ -56,7 +57,10 @@ def edit2(text):
 
 def corretor_string(frase):
     frase_corrigida = []
-    token_frase =  word_tokenize(frase)
+    tokenizer = Tokenizer()
+    #token_frase =  word_tokenize(frase)
+    token_frase = tokenizer.tokenize(tokenizer.clean_text(frase))
+    #print(f"token_frase: {token_frase}")
     for palavra in token_frase:
         if palavra in vocab:
             frase_corrigida.append(palavra)
