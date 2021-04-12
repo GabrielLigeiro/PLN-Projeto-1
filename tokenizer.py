@@ -278,4 +278,3 @@ class Tokenizer():
         return tokens
 
 tokenizer = Tokenizer()
-print(tokenizer.clean_text("bom ,  dia"))

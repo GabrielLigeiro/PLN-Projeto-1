@@ -55,6 +55,18 @@ def edit2(text):
     words2 -= set([text])
     return words2
 
+#elege os candidatos com maior frequencia dentro do vocab
+def candidatos_ordenado(candidatos):
+    freq = []
+    if len(candidatos) == 1:
+        candidatos_ord = [candidatos[-1]]
+    else:
+        for candidato in candidatos[:-1]:
+            freq.append(vocab[candidato])     
+        candidatos_ord = [x for _, x in sorted(zip(freq, candidatos), key=lambda pair: -pair[0])]
+    
+    return candidatos_ord
+
 def corretor_string(frase):
     frase_corrigida = []
     tokenizer = Tokenizer()
@@ -70,7 +82,8 @@ def corretor_string(frase):
                 [w for w in edit1(palavra) if w in vocab] \
                 + [w for w in edit2(palavra) if w in vocab] \
                 + [palavra]
-            frase_corrigida.append(candidatos[0])
+            candidatos_final = candidatos_ordenado(candidatos)
+            frase_corrigida.append(candidatos_final[0])
 
     frase_corrigida_final = str()
     for palavra in frase_corrigida:
